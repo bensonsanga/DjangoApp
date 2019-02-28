@@ -1,16 +1,122 @@
 {% extends "community/base.html" %}
 {% block content %}
     {% for post in posts %}
-      <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
-        <div class="media-body">
-          <div class="article-metadata">
-            <a class="mr-2" href="#">{{ post.author }}</a>
-            <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+    <article class="article-card module module-article link" id="post-283328">
+
+        <style>
+        #post-283328::after {
+          content: "";
+          position: absolute; top: 0; right: 0; width: 80%; height: 80%;
+          background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.75), #100e17),
+            url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/b2745b64395233.5ad0a38667825.jpg);
+          background-size: cover;
+          background-repeat: no-repeat;
+          opacity: 0.75;
+          /* filter: grayscale(100%); */
+        }
+      </style>
+
+      <div class="article-article">
+        <header class="article-publication-meta">
+
+            <svg class="icon-link" width="28px" height="28px">
+          <use xlink:href="#icon-link"></use>
+        </svg>
+        <strong>Link</strong>
+            <time datetime="2019-02-27">
+            {{ post.date_posted|date:"F d, Y" }}     </time>
+        </header>
+
+        <h2>
+          <a href="https://www.jayfreestone.com/writing/wrapping-and-inline-pseudo-elements/">
+            {{ post.title }}      </a>
+        </h2>
+
+
+
+          <div class="link-line">
+
+            <a class="author-name link-shared-by" href="/author/chriscoyier/">
+              <div class="author-avatar">
+                <img alt="Photo of Benson Sanga" src="{{ post.author.profile.image.url }}" class="avatar avatar-80 photo" height="80" width="80">            <svg class="half-circle" width="80px" height="80px">
+                  <use xlink:href="#half-circle"></use>
+                </svg>
+              </div>
+              <div>Shared by<br>
+              <span>{{ post.author }}</span></div>
+            </a>
+
+
+        <div class="article-content">
+          <p>{{ post.content }}</p>
+    <p>Things involved:</p>
+    <ol>
+    <li>Cool <code>[attribute]</code> selectors that identify off-site links</li>
+    <li>Deliberating on whether it's OK to use additional HTML within links or not</li>
+    <li>Usage of <code>white-space</code></li>
+    <li>Combining <code>margin-left</code> and <code>padding-right</code> to place </li></ol>… <a href="/text-wrapping-inline-pseudo-elements/" class="read-more">Read article</a>    </div>
+
+              <div class="link-links">
+            <a href="/text-wrapping-inline-pseudo-elements/" class="link-read-more">
+              Our Notes
+            </a>
+
+            &nbsp;&nbsp;/&nbsp;&nbsp;
+
+            <a href="https://www.jayfreestone.com/writing/wrapping-and-inline-pseudo-elements/" class="link-read-more">
+              Read at
+              www.jayfreestone.com          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-arrow-right">
+    <path d="M7 12.5L23 12.5" stroke="url(#paint0_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M1 12.5H2" stroke="url(#paint1_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M17.5 7L23 12.5L17.5 18" stroke="url(#paint2_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    <defs>
+    <lineargradient id="paint0_linear" x1="10.7498" y1="12.5" x2="11.3447" y2="9.73465" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#FF8A00"></stop>
+    <stop offset="1" stop-color="#DA1B60"></stop>
+    </lineargradient>
+    <lineargradient id="paint1_linear" x1="1.23436" y1="12.5" x2="2.00945" y2="12.2748" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#FF8A00"></stop>
+    <stop offset="1" stop-color="#DA1B60"></stop>
+    </lineargradient>
+    <lineargradient id="paint2_linear" x1="18.789" y1="17.9995" x2="23.3162" y2="17.3419" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#FF8A00"></stop>
+    <stop offset="1" stop-color="#DA1B60"></stop>
+    </lineargradient>
+    </defs>
+    </svg>
+            </a>
           </div>
-          <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-          <p class="text-secondary">{{ post.content }}</p>
-        </div>
-      </article>
+
+          <div class="tags">
+        <a href="/tag/attribute-selectors/" rel="tag">attribute selectors</a> <a href="/tag/inline-block/" rel="tag">inline-block</a> <a href="/tag/psuedo-elements/" rel="tag">psuedo elements</a> <a href="/tag/svg/" rel="tag">SVG</a>  </div>
+
+      </div>
+
+        </div> <!-- end .link-line -->
+
+    </article>
+
+
     {% endfor %}
+    {% if is_paginated %}
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
 {% endblock content %}
