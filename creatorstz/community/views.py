@@ -71,4 +71,32 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 def about(request):
-    return render(request, 'community/about.html', {'title': 'About'})
+    return render(request, 'community/about.html', {'title': 'about'})
+
+
+def entourage(request):
+    return render(request, 'community/entourage.html', {'title': 'entourage'})
+
+
+def tutorials(request):
+    return render(request, 'community/tutorials.html', {'title': 'tutorials'})
+
+
+def dwg(request):
+    return render(request, 'community/dwg.html', {'title': 'dwg'})
+
+
+def scripts(request):
+    return render(request, 'community/scripts.html', {'title': 'scripts'})
+
+
+def models(request):
+    return render(request, 'community/models.html', {'title': 'models'})
+
+
+def icons(request):
+    return render(request, 'community/icons.html', {'title': 'icons'})
+
+
+def maps(request):
+    return render(request, 'community/maps.html', {'title': 'maps'})
